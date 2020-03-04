@@ -4,7 +4,7 @@ here I practiced my react and javascript skills
 I change the topic of the app about finding robot friends to find kittens friends
  
 ## URL in github pages
-https://salsakiuno.github.io/KittyFriends/.
+https://kittensfriend.netlify.com/
 
 ## Available Scripts
 

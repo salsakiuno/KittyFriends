@@ -2,14 +2,26 @@ import React, { Fragment, Component } from 'react';
 import CardList from './CardList';
 import { kitties } from './kitties';
 import SearchBox from './SearchBox';
+import Scroll from './Scroll'
+import './App.css'
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      kitties: kitties,
+      kitties: [],
       searchfield: ''
     }
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(users => {
+      users.map(user => user.catID = Math.floor(Math.random() * 10));
+      return users;
+    })
+    .then(users => this.setState({kitties: kitties.concat(users)}))
   }
 
   onSearchChange = (event)=> {
@@ -27,9 +39,11 @@ class App extends Component {
     return (
       <Fragment>
       <div className='tc'>
-        <h1>Cat Friends!</h1>
+        <h1 className='f2'>Kitten Friends</h1>
         <SearchBox onSearchChange={this.onSearchChange}/>
-        <CardList kitties={ filteredKitties }/>
+        <Scroll>
+          <CardList kitties={ filteredKitties }/>
+        </Scroll>
       </div>
       </Fragment>
     );
